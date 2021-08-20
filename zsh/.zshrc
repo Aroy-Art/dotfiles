@@ -144,7 +144,9 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 . /usr/share/LS_COLORS/dircolors.sh
 
 # Load profile configs
-source ~/.profile
+if [ -r "$HOME/.zprofile" ] ; then
+    source ~/.zprofile       
+fi
 
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
