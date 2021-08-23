@@ -111,7 +111,7 @@ def backup_old_user_configs():
 
 def copy_new_user_configs():
 
-    if query_yes_no("\nBackup old user config files:", "yes") == True:
+    if query_yes_no("\nCopy new user config files:", "yes") == True:
 
         cwd = os.getcwd()
 
