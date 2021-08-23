@@ -77,7 +77,41 @@ def install_missing_packages():
                 zsh-theme-powerlevel10k-git \
                 lscolors-git ")
 
-                
+
+def backup_old_user_configs():
+
+    awnser = query_yes_no("\nBackup old user config files(Recommended):", "yes")
+
+    home_folder = os.getenv('HOME')
+
+    cwd = os.getcwd()
+
+    user_backup_files = [
+        '.zshrc',
+        '.zhistory',
+        '.zprofile',
+        '.zcompdump',
+        '.zshrc',
+        '.clone'
+    ]
+    
+    if awnser == True:
+        
+        if not os.path.exists(home_folder + "/Config-Backup"):
+            os.mkdir(home_folder + "/Config-Backup")
+        elif os.path.exists(home_folder + "/Config-Backup"):
+            print("Found old config backup folder")
+            os.system("mv -v -i" + home_folder + "/Config-Backup " + home_folder + "/Config-Backup~")
+            os.mkdir(home_folder + "/Config-Backup")
+
+        for f in user_backup_files:
+            if os.path.exists(home_folder + "/" + f):
+                print("Exists (Backing up)   :", home_folder + "/" + f)
+                os.system("mv -v -i " + home_folder + "/" + f)
+            else:
+                print("Doesn't exists skiping:", home_folder + "/" + f)
+
 
 if __name__ =='__main__':
     install_missing_packages()
+    backup_old_user_configs()
