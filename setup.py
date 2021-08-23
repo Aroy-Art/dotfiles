@@ -89,8 +89,7 @@ def backup_old_user_configs():
         '.zhistory',
         '.zprofile',
         '.zcompdump',
-        '.zshrc',
-        '.clone'
+        '.zshrc'
     ]
     
     if awnser == True:
@@ -105,7 +104,7 @@ def backup_old_user_configs():
         for f in user_backup_files:
             if os.path.exists(home_folder + "/" + f):
                 print("Exists (Backing up)   :", home_folder + "/" + f)
-                os.system("mv -v -i " + home_folder + "/" + f)
+                os.system("mv -v -i " + home_folder + "/" + f + " " + home_folder + "/Backup")
             else:
                 print("Doesn't exists skiping:", home_folder + "/" + f)
 
