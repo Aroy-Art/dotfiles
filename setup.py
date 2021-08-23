@@ -13,6 +13,8 @@ Logo = '''
     '''
 print(Logo)
 
+home_folder = os.getenv('HOME')
+
 def query_yes_no(question, default):
 #    Ask a yes/no question via input() and return their answer.
 #
@@ -82,10 +84,6 @@ def backup_old_user_configs():
 
     awnser = query_yes_no("\nBackup old user config files(Recommended):", "yes")
 
-    home_folder = os.getenv('HOME')
-
-    cwd = os.getcwd()
-
     user_backup_files = [
         '.zshrc',
         '.zhistory',
@@ -112,6 +110,29 @@ def backup_old_user_configs():
                 print("Doesn't exists skiping:", home_folder + "/" + f)
 
 
+def copy_new_user_configs():
+
+    if query_yes_no("\nBackup old user config files:", "yes") == True:
+
+        cwd = os.getcwd()
+
+        user_new_configs = [
+                '/zsh/.p10k.zsh',
+                '/zsh/.zprofile',
+                '/zsh/.zshrc',
+
+                '/git/.gitconfig',
+
+                '/nano/.nanorc'
+            ]
+        
+        for f in user_new_configs:
+            os.system("cp -v -i " + cwd + f + " " + home_folder)
+
+
 if __name__ =='__main__':
     install_missing_packages()
+
     backup_old_user_configs()
+    
+    copy_new_user_configs()
