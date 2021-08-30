@@ -104,7 +104,7 @@ def backup_old_user_configs():
         for f in user_backup_files:
             if os.path.exists(home_folder + "/" + f):
                 print("Exists (Backing up)   :", home_folder + "/" + f)
-                os.system("mv -v -i " + home_folder + "/" + f + " " + home_folder + "/Backup")
+                os.system("mv -v -i " + home_folder + "/" + f + " " + home_folder + "/Backup/")
             else:
                 print("Doesn't exists skiping:", home_folder + "/" + f)
 
@@ -129,9 +129,18 @@ def copy_new_user_configs():
             os.system("cp -v -i " + cwd + f + " " + home_folder)
 
 
+def set_default_shell():
+    
+    if query_yes_no("\nSet ZSH to default shell?:", "yes"):
+        
+        os.system("chsh -s $(which zsh)")
+
+
 if __name__ =='__main__':
     install_missing_packages()
 
     backup_old_user_configs()
     
     copy_new_user_configs()
+
+    set_default_shell()
