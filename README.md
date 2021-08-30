@@ -5,9 +5,7 @@ This are my awesome configs for:
 * ZSH
 * nano
 * KDE Konsole
-
-
-
+* Git
 
 The colorscheme-files are plain-text-files.
 
